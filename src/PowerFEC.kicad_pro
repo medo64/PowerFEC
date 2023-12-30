@@ -45,7 +45,7 @@
         "silk_text_thickness": 0.09999999999999999,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.25
+          "min_clearance": 0.3
         }
       },
       "diff_pair_dimensions": [
@@ -110,7 +110,7 @@
         "zones_intersect": "error"
       },
       "rules": {
-        "max_error": 0.001,
+        "max_error": 0.005,
         "min_clearance": 0.15,
         "min_connection": 0.19999999999999998,
         "min_copper_edge_clearance": 0.3,
