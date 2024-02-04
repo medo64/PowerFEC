@@ -13,7 +13,7 @@
 |  3 | R 1K 0.125W (0805)                        | R2-R4   | RMCF0805FT1K00CT-ND           |
 |  2 | R 5.1K 0.125W (0805)                      | R5-R6   | RMCF0805FT5K10CT-ND           |
 |  1 | R 56K 0.125W (0805)                       | R7      | RMCF0805FT56K0CT-ND           |
-|  1 | U PIC16F1455 (SOIC-14)                    | U1      | PIC16F1455-I/SL-ND            |
+|  1 | U PIC16F1455 (SOIC-14)                    | U1      | ZXCT1110W5-7DICT-ND           |
 |  1 | U AP22652                                 | U2      | 31-AP22652AW6-7CT-ND          |
 |  1 | U ZXCT1009 (SOT23)                        | U3      | ZXCT1109QSA-7DICT-ND          |
 |  2 | H Screw M2x3mm                            | -       | -                             |
