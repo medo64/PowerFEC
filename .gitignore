@@ -3,8 +3,9 @@ syntax: glob
 datasheets/**
 dist/**
 research/**
-src/*-backups
-src/fp-info-cache
-src/*.kicad_prl
-src/*.kicad_*.lck
-src/*.gcode
+
+hardware/*-backups
+hardware/fp-info-cache
+hardware/*.kicad_prl
+hardware/*.kicad_*.lck
+hardware/*.gcode
