@@ -15,6 +15,7 @@ void execUsb(void) {
     USBDeviceInit();
     USBDeviceAttach();
 
+    io_power_enable();
     io_led_in_on();
 
     while(true) {
