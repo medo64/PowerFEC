@@ -1,5 +1,6 @@
 #pragma once
 #include <xc.h>
+#include <stdbool.h>
 #include "app.h"
 
 // Out: LED_IN
@@ -14,10 +15,13 @@
 // Out: POWER_EN#
 #define out_power_enable()     LATCbits.LATC4 = 0
 #define out_power_disable()    LATCbits.LATC4 = 1
+#define out_power_isEnabled()  (PORTCbits.RC4 == 0)
 
 // In: FAULT#
 #if !defined(BOARD_REV_A)
-    #define in_is_fault()      (PORTCbits.RA5 == 0)
+    #define in_isFaulted()     (PORTCbits.RA5 == 0)
+#else
+    bool in_isFaulted(void);
 #endif
 
 void io_init(void);

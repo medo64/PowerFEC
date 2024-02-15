@@ -21,7 +21,8 @@ void execUsb(void) {
     while(true) {
         watchdog_clear();
 
-        if (ticker_hasTicked()) { out_led_on(); }
+        bool hasTicked = ticker_hasTicked();
+        if (hasTicked) { out_led_on(); }
 
         USBDeviceTasks();
 
@@ -73,6 +74,17 @@ void execUsb(void) {
             InputBufferCount = 0;  // reset counter
         }
 
+        // Check for fault
+        bool isFaulted = in_isFaulted();
+        bool isEnabled = out_power_isEnabled();
+        if (hasTicked) {
+            if (isFaulted && isEnabled) {
+                out_power_disable();
+            } else {
+                out_power_enable();
+            }
+        }
+
         // Send measurements
         if (USBUSARTIsTxTrfReady()) {
             if (OutputBufferCount == 0) {
@@ -120,6 +132,14 @@ void execUsb(void) {
                 OutputBufferAppend('0' + current2);
                 OutputBufferAppend('0' + current3);
                 OutputBufferAppend('0' + current4);
+                if (isFaulted) {
+                    OutputBufferAppend(' ');
+                    OutputBufferAppend('F');
+                    OutputBufferAppend('A');
+                    OutputBufferAppend('U');
+                    OutputBufferAppend('L');
+                    OutputBufferAppend('T');
+                }
                 OutputBufferAppend(0x0D);
                 OutputBufferAppend(0x0A);
             }

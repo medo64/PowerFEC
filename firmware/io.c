@@ -1,7 +1,13 @@
 #include <xc.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include "app.h"
 #include "io.h"
+
+#if defined(BOARD_REV_A)
+    #include "adc.h"
+#include "Microchip/usb_device.h"
+#endif
 
 void io_init(void) {
     // Out: LED_IN
@@ -24,3 +30,10 @@ void io_init(void) {
     TRISAbits.TRISA5 = 1;  // input
 #endif
 }
+
+#if defined(BOARD_REV_A)
+bool in_isFaulted(void) {
+    uint16_t voltage = adc_getVoltage();
+    return (voltage <= 1000);  // 1V is as good limit as any
+}
+#endif
