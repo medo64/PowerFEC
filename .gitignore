@@ -4,6 +4,16 @@ datasheets/**
 dist/**
 research/**
 
+firmware/build/
+firmware/dist/
+firmware/nbproject/Makefile-*.mk
+firmware/nbproject/Makefile-genesis.properties
+firmware/nbproject/Package-*.bash
+firmware/nbproject/private/**
+firmware/funclist
+firmware/*.err
+firmware/*.obj
+
 hardware/*-backups
 hardware/fp-info-cache
 hardware/*.kicad_prl
