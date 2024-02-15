@@ -1,3 +1,10 @@
+#define BOARD_REV_A
+
+#if (!defined(BOARD_REV_A) && !defined(BOARD_REV_B)) || (defined(BOARD_REV_A) + defined(BOARD_REV_B) > 1)
+    #error "Unrecognized board revision"
+#endif
+
+
 #pragma once
 //#pragma warning disable 520
 //#pragma warning disable 1498
