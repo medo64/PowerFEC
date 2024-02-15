@@ -15,13 +15,13 @@ void execUsb(void) {
     USBDeviceInit();
     USBDeviceAttach();
 
-    io_power_enable();
-    io_led_in_on();
+    out_power_enable();
+    out_led_on();
 
     while(true) {
         watchdog_clear();
 
-        if (ticker_hasTicked()) { io_led_in_on(); }
+        if (ticker_hasTicked()) { out_led_on(); }
 
         USBDeviceTasks();
 
@@ -33,7 +33,7 @@ void execUsb(void) {
         // USB receive
         uint8_t readCount = getsUSBUSART(UsbReadBuffer, USB_READ_BUFFER_MAX); //until the buffer is free.
         if (readCount > 0) {
-            io_led_in_off(); ticker_reset();
+            out_led_off(); ticker_reset();
             for (uint8_t i = 0; i < readCount; i++) {  // copy to buffer
                 uint8_t value = UsbReadBuffer[i];
                 if (InputBufferCorrupted && ((value == 0x0A) || (value == 0x0D))) {
@@ -50,7 +50,7 @@ void execUsb(void) {
 
         // USB send
         if ((OutputBufferCount > 0) && USBUSARTIsTxTrfReady()) {  // send output if TX is ready
-            io_led_in_off(); ticker_reset();
+            out_led_off(); ticker_reset();
             uint8_t writeCount = 0;
             for (uint8_t i = 0; i < USB_WRITE_BUFFER_MAX; i++) {  // copy to output buffer
                 if (i < OutputBufferCount) {

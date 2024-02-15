@@ -28,8 +28,8 @@ void main(void) {
     watchdog_init();
 
     for (uint8_t i = 0; i < 3; i++) {
-        io_led_in_on(); ticker_waitTicks(3);
-        io_led_in_off(); ticker_waitTicks(3);
+        out_led_on(); ticker_waitTicks(3);
+        out_led_off(); ticker_waitTicks(3);
     }
 
     watchdog_clear();

@@ -4,16 +4,23 @@
 #include "io.h"
 
 void io_init(void) {
-    // LED_IN
+    // Out: LED_IN
 #if defined(BOARD_REV_A)
-    LATC5 = 0;
-    TRISC5 = 0;  // default state is off (inverse)
+    LATCbits.LATC5 = 0;
+    TRISCbits.TRISC5 = 0;  // default state is off (inverse)
 #else
-    LATA5 = 0;
-    TRISA5 = 0;  // default state is off (inverse)
+    LATAbits.LATA5 = 0;
+    TRISAbits.TRISA5 = 0;  // default state is off (inverse)
 #endif
 
-    // POWER_EN
-    LATC4 = 0;
-    TRISC4 = 0;  // default state is on
+    // Out: POWER_EN#
+    LATCbits.LATC4 = 0;
+    TRISCbits.TRISC4 = 0;  // default state is on
+
+    // In: FAULT#
+#if !defined(BOARD_REV_A)
+    WPUAbits.WPUA5 = 1;    // weak pull-up enabled
+    LATAbits.LATA5 = 0;
+    TRISAbits.TRISA5 = 1;  // input
+#endif
 }
