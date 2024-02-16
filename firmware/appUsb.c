@@ -8,8 +8,8 @@
 #include "ticker.h"
 #include "watchdog.h"
 
-uint32_t voltageSum = 0;
-uint32_t currentSum = 0;
+uint16_t voltageSum = 0;
+uint16_t currentSum = 0;
 
 void execUsb(void) {
     USBDeviceInit();
@@ -95,21 +95,21 @@ void execUsb(void) {
 
                 // moving average
                 if (voltageSum == 0) {
-                    voltageSum = instantVoltage * 60;
+                    voltageSum = instantVoltage * 6;
                 } else {
-                    voltageSum -= (voltageSum / 60);
+                    voltageSum -= (voltageSum / 6);
                     voltageSum += instantVoltage;
                 }
-                uint32_t voltage = (voltageSum / 60);
+                uint16_t voltage = (voltageSum / 6);
                 
                 // moving average
                 if (currentSum == 0) {
-                    currentSum = instantCurrent * 60;
+                    currentSum = instantCurrent * 6;
                 } else {
-                    currentSum -= (currentSum / 60);
+                    currentSum -= (currentSum / 6);
                     currentSum += instantCurrent;
                 }
-                uint32_t current = (currentSum / 60);
+                uint16_t current = (currentSum / 6);
                 
                 uint8_t voltage4 = (voltage % 10); voltage /= 10;
                 uint8_t voltage3 = (voltage % 10); voltage /= 10;
