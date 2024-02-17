@@ -16,12 +16,19 @@ void execUsb(void) {
     USBDeviceAttach();
 
     out_power_enable();
-    out_led_on();
+    out_led1_on();
+    out_led2_on();
 
     while(true) {
         watchdog_clear();
         bool hasTicked = ticker_hasTicked();
-        if (out_power_isEnabled()) { out_led_on(); } else { out_led_off(); }
+        if (out_power_isEnabled()) {
+            out_led1_on();
+            out_led2_on();
+        } else {
+            out_led1_off();
+            out_led2_off();
+        }
 
         USBDeviceTasks();
 
