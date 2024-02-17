@@ -20,9 +20,8 @@ void execUsb(void) {
 
     while(true) {
         watchdog_clear();
-
         bool hasTicked = ticker_hasTicked();
-        if (hasTicked) { out_led_on(); }
+        if (out_power_isEnabled()) { out_led_on(); } else { out_led_off(); }
 
         USBDeviceTasks();
 
@@ -34,7 +33,6 @@ void execUsb(void) {
         // USB receive
         uint8_t readCount = getsUSBUSART(UsbReadBuffer, USB_READ_BUFFER_MAX); //until the buffer is free.
         if (readCount > 0) {
-            out_led_off(); ticker_reset();
             for (uint8_t i = 0; i < readCount; i++) {  // copy to buffer
                 uint8_t value = UsbReadBuffer[i];
                 if (InputBufferCorrupted && ((value == 0x0A) || (value == 0x0D))) {
@@ -51,7 +49,6 @@ void execUsb(void) {
 
         // USB send
         if ((OutputBufferCount > 0) && USBUSARTIsTxTrfReady()) {  // send output if TX is ready
-            out_led_off(); ticker_reset();
             uint8_t writeCount = 0;
             for (uint8_t i = 0; i < USB_WRITE_BUFFER_MAX; i++) {  // copy to output buffer
                 if (i < OutputBufferCount) {
@@ -132,6 +129,12 @@ void execUsb(void) {
                 OutputBufferAppend('0' + current2);
                 OutputBufferAppend('0' + current3);
                 OutputBufferAppend('0' + current4);
+                if (!isEnabled) {
+                    OutputBufferAppend(' ');
+                    OutputBufferAppend('O');
+                    OutputBufferAppend('F');
+                    OutputBufferAppend('F');
+                }
                 if (isFaulted) {
                     OutputBufferAppend(' ');
                     OutputBufferAppend('F');
