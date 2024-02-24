@@ -8,8 +8,9 @@
 #include "ticker.h"
 #include "watchdog.h"
 
-uint16_t voltageSum = 0;
-uint16_t currentSum = 0;
+#define RUNNING_AVERAGE_BITS  6  // 64x
+uint24_t voltageSum = 0;
+uint24_t currentSum = 0;
 
 void execUsb(void) {
     USBDeviceInit();
@@ -91,30 +92,33 @@ void execUsb(void) {
 
         // Send measurements
         if (USBUSARTIsTxTrfReady()) {
-            if (OutputBufferCount == 0) {
-                uint16_t instantVoltage = adc_getVoltage();
-                uint16_t instantCurrent = adc_getCurrent();
-                if (instantVoltage > 9999) { instantVoltage = 9999; }
-                if (instantCurrent > 9999) { instantCurrent = 9999; }
+            // measure 
+            uint24_t instantVoltage = adc_getVoltage();
+            uint24_t instantCurrent = adc_getCurrent();
+            if (instantVoltage > 9999) { instantVoltage = 9999; }
+            if (instantCurrent > 9999) { instantCurrent = 9999; }
 
-                // moving average
-                if (voltageSum == 0) {
-                    voltageSum = instantVoltage * 6;
-                } else {
-                    voltageSum -= (voltageSum / 6);
-                    voltageSum += instantVoltage;
-                }
-                uint16_t voltage = (voltageSum / 6);
-                
-                // moving average
-                if (currentSum == 0) {
-                    currentSum = instantCurrent * 6;
-                } else {
-                    currentSum -= (currentSum / 6);
-                    currentSum += instantCurrent;
-                }
-                uint16_t current = (currentSum / 6);
-                
+            // moving average for voltage
+            if (voltageSum == 0) {
+                voltageSum = (instantVoltage << RUNNING_AVERAGE_BITS);
+            } else {
+                voltageSum -= (voltageSum >> RUNNING_AVERAGE_BITS);
+                voltageSum += instantVoltage;
+            }
+
+            // moving average for current
+            if (currentSum == 0) {
+                currentSum = (instantCurrent << RUNNING_AVERAGE_BITS);
+            } else {
+                currentSum -= (currentSum >> RUNNING_AVERAGE_BITS);
+                currentSum += instantCurrent;
+            }
+
+            // send when existing data was already sent
+            if (OutputBufferCount == 0) {
+                uint16_t voltage = (uint16_t)(voltageSum >> RUNNING_AVERAGE_BITS);
+                uint16_t current = (uint16_t)(currentSum >> RUNNING_AVERAGE_BITS);
+
                 uint8_t voltage4 = (voltage % 10); voltage /= 10;
                 uint8_t voltage3 = (voltage % 10); voltage /= 10;
                 uint8_t voltage2 = (voltage % 10); voltage /= 10;
