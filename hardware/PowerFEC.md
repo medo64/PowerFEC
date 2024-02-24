@@ -6,9 +6,9 @@
 |  1 | C 1uF 16V X7R (0805)                      | C4      | 1276-6470-1-ND                |
 |  2 | C 10uF X5R 16V (0805)                     | C5-C6   | 1276-1096-1-ND                |
 |  2 | DS LED (0805)                             | DS1-DS2 | 475-1415-1-ND                 |
-|  1 | J JST XH Vertical (2w)                    | J1      | 455-B2B-XH-A-ND               |
+|  1 | P USB C, plug, straddle 0.8mm             | J1      | WM12855-ND                    |
+|  1 | J JST XH Vertical (2w)                    | J2      | 455-B2B-XH-A-ND               |
 |  1 | L Ferrite 600R@100Mhz                     | L1      | 240-2390-1-ND                 |
-|  1 | P USB C, plug, straddle 0.8mm             | P1      | WM12855-ND                    |
 |  1 | R .1, 1%, 1W (2512)                       | R1      | CRA2512-FZ-R100ELFCT-ND       |
 |  3 | R 1K 0.125W (0805)                        | R2-R4   | RMCF0805FT1K00CT-ND           |
 |  2 | R 5.1K 0.125W (0805)                      | R5-R6   | RMCF0805FT5K10CT-ND           |
