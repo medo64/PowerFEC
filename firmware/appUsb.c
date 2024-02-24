@@ -154,6 +154,10 @@ void execUsb(void) {
                     OutputBufferAppend('L');
                     OutputBufferAppend('T');
                 }
+                //if (hasTicked) {  / debug
+                    //OutputBufferAppend(' ');
+                    //OutputBufferAppend('T');
+                //}
                 OutputBufferAppend(0x0D);
                 OutputBufferAppend(0x0A);
             }
