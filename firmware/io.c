@@ -35,3 +35,11 @@ void io_init(void) {
     TRISAbits.TRISA5 = 1;  // input
 #endif
 }
+
+#if defined(BOARD_REV_A)
+bool in_isFaulted(void) {
+    if (!out_power_isEnabled()) { return false; }  // not a fault if it's disabled
+    uint16_t voltage = adc_getVoltage();
+    return (voltage <= 5);  // small enough not to cause false positives
+}
+#endif

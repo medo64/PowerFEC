@@ -24,11 +24,7 @@
 
 // In: FAULT#
 #if defined(BOARD_REV_A)
-bool in_isFaulted(void) {
-    if (!out_power_isEnabled()) { return false; }  // not a fault if it's disabled
-    uint16_t voltage = adc_getVoltage();
-    return (voltage <= 5);  // small enough not to cause falst positives
-}
+bool in_isFaulted(void);
 #else
 #define in_isFaulted()         (PORTCbits.RA5 == 0)
 #endif
