@@ -42,8 +42,13 @@ character (`~`), original command, and `CR``LF`.
 | `8`  | Voltage and current read are smoothed over 256 readings       |
 | `9`  | Voltage and current read are smoothed over 512 readings       |
 | `d`  | Disable output                                                |
+| `D`  | Disable output and allow saving for startup                   |
 | `e`  | Enable output                                                 |
+| `E`  | Enable output and allow saving for startup                    |
 | `S`  | Saves current settings                                        |
+
+Any command state that can be saved permanently (e.g. `E`) needs to be followed
+by `S` command in order to be saved.
 
 
 ---

@@ -23,7 +23,7 @@ void execUsb(void) {
     out_led2_on();
 
     uint8_t smoothingPower = settings_getSmoothing();
-    bool shouldEnable = true;
+    bool shouldEnable = settings_getStartEnabled();
 
     while(true) {
         watchdog_clear();
@@ -198,8 +198,18 @@ void processInput(uint8_t b, uint8_t *smoothingPower, bool *shouldEnable) {
             *shouldEnable = false;
             wasSuccessful = true;
             break;
+        case 'D':
+            *shouldEnable = false;
+            settings_setStartEnabled(false);
+            wasSuccessful = true;
+            break;
         case 'e':
             *shouldEnable = true;
+            wasSuccessful = true;
+            break;
+        case 'E':
+            *shouldEnable = true;
+            settings_setStartEnabled(true);
             wasSuccessful = true;
             break;
         case 'S':  // save

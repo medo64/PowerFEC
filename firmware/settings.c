@@ -58,3 +58,12 @@ uint8_t settings_getSmoothing() {
 void settings_setSmoothing(uint8_t newValue) {
     Settings.Smoothing = newValue;
 }
+
+
+bool settings_getStartEnabled() {
+    return Settings.StartEnabled;
+}
+
+void settings_setStartEnabled(bool newValue) {
+    Settings.StartEnabled = newValue;
+}
