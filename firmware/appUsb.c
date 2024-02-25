@@ -12,6 +12,8 @@
 uint24_t voltageSum = 0;
 uint24_t currentSum = 0;
 
+void processInput(uint8_t b, uint8_t *smoothingPower);
+
 void execUsb(void) {
     USBDeviceInit();
     USBDeviceAttach();
@@ -75,9 +77,13 @@ void execUsb(void) {
             }
         }
 
-        // Process data (ignore for now)
+        // Process data
         if (InputBufferCount > 0) {
-            //for (uint8_t i = 0; i < InputBufferCount; i++) { OutputBufferAppend(InputBuffer[i]); }  // test echo
+            for (uint8_t i = 0; i < InputBufferCount; i++) {
+                //OutputBufferAppend(InputBuffer[i]);  // test echo
+                uint8_t b = InputBuffer[i];
+                processInput(b, &smoothingPower);
+            }
             InputBufferCount = 0;  // reset counter
         }
 
@@ -164,5 +170,35 @@ void execUsb(void) {
                 OutputBufferAppend(0x0A);
             }
         }
+    }
+}
+
+void processInput(uint8_t b, uint8_t *smoothingPower, bool *shouldEnable) {
+    bool wasSuccessful = false;
+    switch (b) {
+        case '0':  // set smoothing
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            *smoothingPower = b - 0x30;
+            settings_setSmoothing(*smoothingPower);
+            wasSuccessful = true;
+            break;
+        case 'S':  // save
+            settings_save();
+            wasSuccessful = true;
+            break;
+    }
+    if (wasSuccessful) {
+        OutputBufferAppend('~')
+        OutputBufferAppend(b)
+        OutputBufferAppend(0x0D);
+        OutputBufferAppend(0x0A);
     }
 }

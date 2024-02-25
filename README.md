@@ -24,5 +24,25 @@ Right LED signals if output is powered and there are no faults. It will turn off
 if there is an over-current state (typically at around `525 mA`).
 
 
+## Commands
+
+Each char is a separate command. If it is recognized, output will be tilde
+character (`~`), original command, and `CR``LF`.
+
+| Char | Description                                                   |
+|------|---------------------------------------------------------------|
+| `0`  | No smoothing for voltage and current                          |
+| `1`  | Voltage and current read are smoothed over 2 readings         |
+| `2`  | Voltage and current read are smoothed over 4 readings         |
+| `3`  | Voltage and current read are smoothed over 8 readings         |
+| `4`  | Voltage and current read are smoothed over 16 readings        |
+| `5`  | Voltage and current read are smoothed over 32 readings        |
+| `6`  | Voltage and current read are smoothed over 64 readings        |
+| `7`  | Voltage and current read are smoothed over 128 readings       |
+| `8`  | Voltage and current read are smoothed over 256 readings       |
+| `9`  | Voltage and current read are smoothed over 512 readings       |
+| `S`  | Saves current settings                                        |
+
+
 ---
 *You can check my blog and other projects at [www.medo64.com](https://www.medo64.com/electronics/).*
