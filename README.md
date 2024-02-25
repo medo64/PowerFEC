@@ -41,6 +41,8 @@ character (`~`), original command, and `CR``LF`.
 | `7`  | Voltage and current read are smoothed over 128 readings       |
 | `8`  | Voltage and current read are smoothed over 256 readings       |
 | `9`  | Voltage and current read are smoothed over 512 readings       |
+| `d`  | Disable output                                                |
+| `e`  | Enable output                                                 |
 | `S`  | Saves current settings                                        |
 
 

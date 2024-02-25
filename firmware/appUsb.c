@@ -12,7 +12,7 @@
 uint24_t voltageSum = 0;
 uint24_t currentSum = 0;
 
-void processInput(uint8_t b, uint8_t *smoothingPower);
+void processInput(uint8_t b, uint8_t *smoothingPower, bool* shouldEnable);
 
 void execUsb(void) {
     USBDeviceInit();
@@ -23,6 +23,7 @@ void execUsb(void) {
     out_led2_on();
 
     uint8_t smoothingPower = settings_getSmoothing();
+    bool shouldEnable = true;
 
     while(true) {
         watchdog_clear();
@@ -82,10 +83,13 @@ void execUsb(void) {
             for (uint8_t i = 0; i < InputBufferCount; i++) {
                 //OutputBufferAppend(InputBuffer[i]);  // test echo
                 uint8_t b = InputBuffer[i];
-                processInput(b, &smoothingPower);
+                processInput(b, &smoothingPower, &shouldEnable);
             }
             InputBufferCount = 0;  // reset counter
         }
+
+        // Set enabled state
+        if (shouldEnable) { out_power_enable(); } else { out_power_disable(); }
 
         // Check for fault
         bool isFaulted = in_isFaulted();
@@ -188,6 +192,14 @@ void processInput(uint8_t b, uint8_t *smoothingPower, bool *shouldEnable) {
         case '9':
             *smoothingPower = b - 0x30;
             settings_setSmoothing(*smoothingPower);
+            wasSuccessful = true;
+            break;
+        case 'd':
+            *shouldEnable = false;
+            wasSuccessful = true;
+            break;
+        case 'e':
+            *shouldEnable = true;
             wasSuccessful = true;
             break;
         case 'S':  // save
