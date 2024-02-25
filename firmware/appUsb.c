@@ -7,8 +7,8 @@
 #include "io.h"
 #include "ticker.h"
 #include "watchdog.h"
+#include "settings.h"
 
-#define RUNNING_AVERAGE_BITS  6  // 64x
 uint24_t voltageSum = 0;
 uint24_t currentSum = 0;
 
@@ -19,6 +19,8 @@ void execUsb(void) {
     out_power_enable();
     out_led1_on();
     out_led2_on();
+
+    uint8_t smoothingPower = settings_getSmoothing();
 
     while(true) {
         watchdog_clear();
@@ -100,24 +102,24 @@ void execUsb(void) {
 
             // moving average for voltage
             if (voltageSum == 0) {
-                voltageSum = (instantVoltage << RUNNING_AVERAGE_BITS);
+                voltageSum = (instantVoltage << smoothingPower);
             } else {
-                voltageSum -= (voltageSum >> RUNNING_AVERAGE_BITS);
+                voltageSum -= (voltageSum >> smoothingPower);
                 voltageSum += instantVoltage;
             }
 
             // moving average for current
             if (currentSum == 0) {
-                currentSum = (instantCurrent << RUNNING_AVERAGE_BITS);
+                currentSum = (instantCurrent << smoothingPower);
             } else {
-                currentSum -= (currentSum >> RUNNING_AVERAGE_BITS);
+                currentSum -= (currentSum >> smoothingPower);
                 currentSum += instantCurrent;
             }
 
             // send when existing data was already sent
             if (OutputBufferCount == 0) {
-                uint16_t voltage = (uint16_t)(voltageSum >> RUNNING_AVERAGE_BITS);
-                uint16_t current = (uint16_t)(currentSum >> RUNNING_AVERAGE_BITS);
+                uint16_t voltage = (uint16_t)(voltageSum >> smoothingPower);
+                uint16_t current = (uint16_t)(currentSum >> smoothingPower);
 
                 uint8_t voltage4 = (voltage % 10); voltage /= 10;
                 uint8_t voltage3 = (voltage % 10); voltage /= 10;

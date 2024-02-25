@@ -7,7 +7,7 @@
 #define SETTING_DEFAULT_DISPLAY_INVERSE     0
 
 #define _SETTINGS_FLASH_RAW {                                                                \
-                              0,                                                             \
+                              4,                                                             \
                               0,                                                             \
                               0,                                                             \
                               0,                                                             \
@@ -22,7 +22,8 @@
 const uint8_t _SETTINGS_PROGRAM[] __at(_SETTINGS_FLASH_LOCATION) = _SETTINGS_FLASH_RAW;
 
 typedef struct {
-    uint8_t Reserved[6];
+    uint8_t Smoothing;
+    uint8_t Reserved[5];
     uint8_t UsbSerialLength;
     uint8_t UsbSerialType;
     uint8_t UsbSerialValue[24];
@@ -36,3 +37,10 @@ void settings_init();
 
 /** Saves settings to EEPROM. */
 void settings_save();
+
+
+/** Gets smooothing value as power of two 2^(0-9) */
+uint8_t settings_getSmoothing();
+
+/** Sets smooothing value power of 2 as (0-9) without checking. */
+void settings_setSmoothing(uint8_t newValue);

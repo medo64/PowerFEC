@@ -49,3 +49,12 @@ void settings_save() {
     PMCON1bits.WREN = 0;  // disable writes
     if (hadInterruptsEnabled) { INTCONbits.GIE = 1; }  // restore interrupts
 }
+
+
+uint8_t settings_getSmoothing() {
+    return Settings.Smoothing;
+}
+
+void settings_setSmoothing(uint8_t newValue) {
+    Settings.Smoothing = newValue;
+}
