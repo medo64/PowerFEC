@@ -8,7 +8,7 @@
 
 #define _SETTINGS_FLASH_RAW {                                                                \
                               4,                                                             \
-                              1,                                                             \
+                              0x01,                                                          \
                               0xFF,                                                          \
                               0,                                                             \
                               0,                                                             \
@@ -23,7 +23,7 @@ const uint8_t _SETTINGS_PROGRAM[] __at(_SETTINGS_FLASH_LOCATION) = _SETTINGS_FLA
 
 typedef struct {
     uint8_t Smoothing;
-    uint8_t StartEnabled;
+    uint8_t Flags;
     uint8_t ZeroCurrentAdc;
     uint8_t Reserved[3];
     uint8_t UsbSerialLength;

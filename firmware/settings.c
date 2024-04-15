@@ -61,11 +61,15 @@ void settings_setSmoothing(uint8_t newValue) {
 
 
 bool settings_getStartEnabled() {
-    return Settings.StartEnabled;
+    return (Settings.Flags & 0x01) != 0;
 }
 
 void settings_setStartEnabled(bool newValue) {
-    Settings.StartEnabled = newValue;
+    if (newValue) {
+        Settings.Flags |= 0x01;
+    } else {
+        Settings.Flags &= ~0x01;
+    }
 }
 
 
