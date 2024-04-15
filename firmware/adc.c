@@ -4,7 +4,7 @@
 #include "Microchip/usb_device.h"
 
 #define ADC_VOLTAGE_BIT_MULTIPLIER  6034  // should be 6100
-#define ADC_CURRENT_BIT_MULTIPLIER  1500  // should be 1000
+#define ADC_CURRENT_BIT_MULTIPLIER   978  // should be 1000
 
 void adc_init(void) {
     FVRCONbits.ADFVR = 0b01;     // ADC Fixed Voltage Reference Peripheral output is 1x (1.024V)
