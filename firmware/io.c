@@ -15,12 +15,12 @@ void io_init(void) {
     LATCbits.LATC5 = 0;
     TRISCbits.TRISC5 = 0;  // default state is off (inverse)
 #else
-    LATAbits.LATA5 = 0;
-    TRISAbits.TRISA5 = 0;  // default state is off (inverse)
+    LATCbits.LATC5 = 0;
+    TRISCbits.TRISC5 = 0;  // default state is off (inverse)
 #endif
 
     // Out: LED2 (right)
-    LATCbits.LATC2 = 1;    // default state is off
+    LATCbits.LATC2 = 0;    // default state is off
     TRISCbits.TRISC2 = 0;
     ANSELCbits.ANSC2 = 0;
 
