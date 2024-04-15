@@ -1,4 +1,4 @@
-#define BOARD_REV_A
+#define BOARD_REV_B
 
 #if (!defined(BOARD_REV_A) && !defined(BOARD_REV_B)) || (defined(BOARD_REV_A) + defined(BOARD_REV_B) > 1)
     #error "Unrecognized board revision"
