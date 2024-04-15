@@ -28,9 +28,10 @@ void main(void) {
     watchdog_init();
 
     for (uint8_t i = 0; i < 3; i++) {
-        out_led1_on();  out_led2_on();  ticker_waitTicks(3);
-        out_led1_off(); out_led2_off(); ticker_waitTicks(3);
+        out_led1_on();  out_led2_off();  ticker_waitTicks(3);
+        out_led1_off(); out_led2_on(); ticker_waitTicks(3);
     }
+    out_led2_off();
 
     watchdog_clear();
     execUsb();
