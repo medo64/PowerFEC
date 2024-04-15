@@ -46,8 +46,18 @@ uint16_t adc_getVoltage() {
     return (uint16_t)value;
 }
 
+uint16_t adc_getRawCurrent() {
+    return adc_getRaw(3);
+}
+
+uint8_t offsetCurrent;
+void adc_setCurrentOffset(uint8_t offset) {
+    offsetCurrent = offset;
+}
+
 uint16_t adc_getCurrent() {
-    uint32_t value = adc_getRaw(3);
+    uint32_t value = adc_getRawCurrent();
+    if (value <= offsetCurrent) { value = 0; } else { value -= offsetCurrent; }
     value *= ADC_CURRENT_BIT_MULTIPLIER;
     value /= 1000;
     return (uint16_t)value;

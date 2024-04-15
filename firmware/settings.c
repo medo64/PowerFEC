@@ -67,3 +67,12 @@ bool settings_getStartEnabled() {
 void settings_setStartEnabled(bool newValue) {
     Settings.StartEnabled = newValue;
 }
+
+
+uint8_t settings_getZeroCurrentAdc() {
+    return Settings.ZeroCurrentAdc;
+}
+
+void settings_setZeroCurrentAdc(uint8_t newValue) {
+    Settings.ZeroCurrentAdc = newValue;
+}
