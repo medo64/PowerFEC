@@ -157,8 +157,7 @@ void execUsb(void) {
                     OutputBufferAppend('O');
                     OutputBufferAppend('F');
                     OutputBufferAppend('F');
-                }
-                if (isFaulted) {
+                } else if (isFaulted) {
                     OutputBufferAppend(' ');
                     OutputBufferAppend('F');
                     OutputBufferAppend('A');
