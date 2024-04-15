@@ -9,8 +9,8 @@
 #include "watchdog.h"
 #include "settings.h"
 
-uint24_t voltageSum = 0;
-uint24_t currentSum = 0;
+uint24_t voltageSum = 0xFFFFFF;
+uint24_t currentSum = 0xFFFFFF;
 
 void processInput(uint8_t b, uint8_t *smoothingPower, bool* shouldEnable);
 
@@ -111,7 +111,7 @@ void execUsb(void) {
             if (instantCurrent > 9999) { instantCurrent = 9999; }
 
             // moving average for voltage
-            if (voltageSum == 0) {
+            if (voltageSum == 0xFFFFFF) {
                 voltageSum = (instantVoltage << smoothingPower);
             } else {
                 voltageSum -= (voltageSum >> smoothingPower);
@@ -119,7 +119,7 @@ void execUsb(void) {
             }
 
             // moving average for current
-            if (currentSum == 0) {
+            if (currentSum == 0xFFFFFF) {
                 currentSum = (instantCurrent << smoothingPower);
             } else {
                 currentSum -= (currentSum >> smoothingPower);
