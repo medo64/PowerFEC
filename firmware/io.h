@@ -26,7 +26,7 @@
 #if defined(BOARD_REV_A)
 bool in_isFaulted(void);
 #else
-#define in_isFaulted()         (PORTCbits.RA5 == 0)
+#define in_isFaulted()         (PORTAbits.RA5 == 0)
 #endif
 
 void io_init(void);
