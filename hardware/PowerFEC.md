@@ -12,10 +12,10 @@
 |  1 | J JST XH Vertical (2w)                    | J2      | 455-B2B-XH-A-ND               |
 |  1 | L Ferrite 600R@100Mhz                     | L1      | 240-2390-1-ND                 |
 |  1 | R 0.1, 0.5%, 0.5W (1206)                  | R1      | 273-KDV12DR100ETCT-ND         |
-|  3 | R 1K 0.125W (0805)                        | R2-R4   | RMCF0805FT1K00CT-ND           |
-|  2 | R 5.1K 0.125W (0805)                      | R5-R6   | RMCF0805FT5K10CT-ND           |
-|  2 | R 5.1K 0.125W (0805)                    † | R7-R8   | RMCF0805FT5K10CT-ND           |
-|  1 | R 56K 0.125W (0805)                       | R9      | RMCF0805FT56K0CT-ND           |
+|  4 | R 1K 0.125W (0805)                        | R2-R5   | RMCF0805FT1K00CT-ND           |
+|  2 | R 5.1K 0.125W (0805)                      | R6-R7   | RMCF0805FT5K10CT-ND           |
+|  2 | R 5.1K 0.125W (0805)                    † | R8-R9   | RMCF0805FT5K10CT-ND           |
+|  1 | R 56K 0.125W (0805)                       | R10     | RMCF0805FT56K0CT-ND           |
 |  1 | U PIC16F1455 (SOIC-14)                    | U1      | PIC16F1455-I/SL-ND            |
 |  1 | U AP22652                                 | U2      | 31-AP22652AW6-7CT-ND          |
 |  1 | U ZXCT1009 (SOT23)                        | U3      | ZXCT1109QSA-7DICT-ND          |

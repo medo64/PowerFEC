@@ -3524,7 +3524,7 @@
 		(uuid "893c656f-2330-4d89-a9b5-7ec34da0dc8b")
 		(at 37.5 38.5 90)
 		(tags "RESC2013X70N")
-		(property "Reference" "R5"
+		(property "Reference" "R7"
 			(at 0 -1.6 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4159,7 +4159,7 @@
 		(uuid "b1d6f603-e5cc-4d9f-8ea8-5904a10d620e")
 		(at 27.7 31.5 90)
 		(tags "RESC2013X70N")
-		(property "Reference" "R9"
+		(property "Reference" "R10"
 			(at 0 -1.6 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4603,7 +4603,7 @@
 		(uuid "d22bfd11-7f61-4dc4-b6bb-0ad73fb55c6e")
 		(at 39.7 38.5 -90)
 		(tags "RESC2013X70N")
-		(property "Reference" "R4"
+		(property "Reference" "R5"
 			(at 0 -1.6 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4616,7 +4616,7 @@
 			)
 		)
 		(property "Value" "1K"
-			(at 2.4 0 0)
+			(at 2.4 0 180)
 			(layer "F.SilkS")
 			(uuid "3c83ccb0-e276-4427-86b0-ba1eda88d744")
 			(effects
@@ -4899,7 +4899,7 @@
 		(uuid "22346641-d430-4276-ac5b-3dbbb632dc3d")
 		(at 42.2 28 90)
 		(tags "RESC2013X70N")
-		(property "Reference" "R8"
+		(property "Reference" "R9"
 			(at 0 1.6 90)
 			(layer "B.SilkS")
 			(hide yes)
@@ -5788,7 +5788,7 @@
 		(uuid "f63147f0-86d9-4bcb-9b6e-8b75fcad06cf")
 		(at 40.2 28 90)
 		(tags "RESC2013X70N")
-		(property "Reference" "R7"
+		(property "Reference" "R8"
 			(at 0 1.6 90)
 			(layer "B.SilkS")
 			(hide yes)
